@@ -66,6 +66,8 @@ public class Pet implements I_PetActions, I_PetBasic, I_PetBattle, Serializable 
 		playerTexture = petType.getTexture();
 		foeTexture = petType.getTexture();
 	}
+	
+	
 
 	@Override
 	public boolean takeDamage(int _damageToTake) {

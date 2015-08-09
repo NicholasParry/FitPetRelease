@@ -5,7 +5,7 @@ import org.robovm.apple.uikit.UIApplication;
 
 import com.badlogic.gdx.backends.iosrobovm.IOSApplication;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplicationConfiguration;
-import nz.geek.nicholasparry.FitPetMain;
+import nz.geek.nicholasparry.fitpet.FitPetMain;
 
 public class IOSLauncher extends IOSApplication.Delegate {
     @Override

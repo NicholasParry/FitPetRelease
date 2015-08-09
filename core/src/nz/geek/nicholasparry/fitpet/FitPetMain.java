@@ -11,9 +11,10 @@ package nz.geek.nicholasparry.fitpet;
 
 import nz.geek.nicholasparry.fitpet.Assets.SoundAssets;
 import nz.geek.nicholasparry.fitpet.PlatformDependant.PlatformPackage;
-import nz.geek.nicholasparry.fitpet.PlatformDependant.SaveManager;
+import nz.geek.nicholasparry.fitpet.saves.SaveManager;
 import nz.geek.nicholasparry.fitpet.Screen.HomeScreen;
 import nz.geek.nicholasparry.fitpet.Screen.MainMenuScreen;
+import nz.geek.nicholasparry.fitpet.Screen.NewGameScreen;
 import nz.geek.nicholasparry.fitpet.components.AudioPlayer;
 
 import com.badlogic.gdx.Game;
@@ -37,15 +38,7 @@ public class FitPetMain extends Game{
 	public static FitPetMain fitPetMain; // oh fucking man, I AM THE BEST CODER EVER
 	public static PlatformPackage platformPackage;
 	
-	public FitPetMain(SaveManager _saveManager){
-		saveManager = _saveManager;
-                //sSystem.out.println(Gdx.files.internal("").path());
-                //Gdx.files.
-		
-		//mainTheme = new AudioPlayer();
-		//mainTheme.playSound(SoundAssets.mainTheme, true);
-		//mainTheme.pauseSound();
-	}
+	
 	
 	public FitPetMain(){
 		fitPetMain = this;
@@ -56,22 +49,25 @@ public class FitPetMain extends Game{
 	
 	@Override
 	public void create () {
-		if(saveManager == null){
-			saveManager = new AndroidSaveManager();
-		}
-		setScreen(new MainMenuScreen(this));
-		//Gdx.app.setLogLevel(0);
-		if(saveManager.autoLoad() && loadGame()){
-			setScreen(new HomeScreen(this));
-		} else {
-			setScreen(new MainMenuScreen(this));
-		}
+		//setup shit
 		
-		//mainTheme = new AudioPlayer();
-		//mainTheme.playSound(SoundAssets.mainTheme, true);
-		//mainTheme.pauseSound();
+		//play sound
 		makeMainThemeObj();
 		playMainTheme();
+		
+		//Set up saves
+		saveManager = new SaveManager();
+		if(saveManager.savedGameExsistes()){
+			player = saveManager.loadGame();
+			if(player == null){
+				setScreen(new NewGameScreen(this));
+				return;
+			}
+			setScreen(new HomeScreen(this));
+		} else {
+			setScreen(new NewGameScreen(this));
+		}
+		
 	}
 	
 	@Override
@@ -88,16 +84,20 @@ public class FitPetMain extends Game{
 	}
 	
 	public boolean saveGame(){
-		
-		return saveManager.savePlayer(player);
+		return saveManager.saveGame(player);
 	}
 	
+	/**
+	 * Loads a game
+	 * @return true if successful
+	 */
 	public boolean loadGame(){
-		player = saveManager.getPlayer();
-		player.onDeserialization();
-		
-		//Gdx.app.log("FitPetMain", player.toString());
-		return (player != null);
+		if(saveManager.savedGameExsistes()){
+			player = saveManager.loadGame();
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	/**
