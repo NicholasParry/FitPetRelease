@@ -35,6 +35,7 @@ public class HomeScreen implements Screen{
 	private TextureButton playB;
 	private TextureButton battleB;
 	private TextureButton petImage;
+	private TextureButton settings;
 	private PetInfoBox petInfoBox;
 	
 	private Stage stage;
@@ -54,7 +55,6 @@ public class HomeScreen implements Screen{
 
 	@Override
 	public void show() {
-		
 		view = new FillViewport(1080, 1920);
 		view.update(1080, 1920, true);
 		stage = new Stage(view);
@@ -62,7 +62,18 @@ public class HomeScreen implements Screen{
 		
 		
 		
-		
+		settings = new TextureButton(Buttons.settings);
+		settings.setSize(200, 200);
+		settings.setPosition((stage.getWidth() / 2) - (settings.getWidth() + 50),
+				(stage.getHeight() / 1) - (settings.getHeight()));
+		settings.addListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				FitPetMain.fitPetMain.setScreen(new SettingsScreen());
+				super.clicked(event, x, y);
+			}
+		});
+		stage.addActor(settings);
 		
 		feedB = new TextureButton(Buttons.feedIcon);
 		feedB.setSize(200, 200);
@@ -158,16 +169,7 @@ public class HomeScreen implements Screen{
 		
 	}
 	
-	/*
-	@Override
-	public void render(float delta) {
-		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		batch = new SpriteBatch();
-		batch.begin();
-		batch.draw(petDisplay.getTexture(), 50, 50);
-		batch.end();
-	}*/
+	
 	
 	public void feedPet(){
 		

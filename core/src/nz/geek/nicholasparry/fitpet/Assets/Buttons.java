@@ -23,6 +23,15 @@ public class Buttons {
 	public static Texture splashButton = new Texture(Gdx.files.internal("Buttons/Attacks/splashButton.png"));
 	public static Texture tidalWaveButton = new Texture(Gdx.files.internal("Buttons/Attacks/tidalWaveButton.png"));
 	
+	
+	public static Texture toggleMusicOn = new Texture(Gdx.files.internal("icons/music_on.png"));
+	public static Texture toggleMusicOff = new Texture(Gdx.files.internal("icons/music_off.png"));
+	public static Texture toggleSfxOn = new Texture(Gdx.files.internal("icons/sfx_on.png"));
+	public static Texture toggleSfxOff = new Texture(Gdx.files.internal("icons/sfx_off.png"));
+	public static Texture settings = new Texture(Gdx.files.internal("icons/setting.png"));
+	
+	public static Texture home = new Texture(Gdx.files.internal("icons/home.png"));
+	
 	public Buttons() {
 		//h = new FileHandle
 	}

@@ -19,6 +19,7 @@ import nz.geek.nicholasparry.fitpet.components.AudioPlayer;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 
 import engine.screen.SplashScreen;
 
@@ -72,6 +73,8 @@ public class FitPetMain extends Game{
 	
 	@Override
 	public void render () {
+		Gdx.gl.glClearColor(0,1,0,1);
+		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		super.render(); //important, but always fun to turn off :D
 	}
 	
@@ -127,6 +130,17 @@ public class FitPetMain extends Game{
 		mainTheme = new AudioPlayer();
 		mainTheme.playSound(SoundAssets.mainTheme, true);
 		mainTheme.pauseSound();
+	}
+	
+	
+	
+	/**
+	 * Switches screen and saves the game, fantastico
+	 */
+	@Override
+	public void setScreen(Screen screen) {
+		saveGame();
+		super.setScreen(screen);
 	}
 	
 	

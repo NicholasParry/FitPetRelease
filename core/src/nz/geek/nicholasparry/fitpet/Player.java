@@ -5,33 +5,24 @@ import java.io.Serializable;
 import engine.rendering.DisplayObject;
 import nz.geek.nicholasparry.fitpet.pets.Pet;
 
-public class Player implements Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -1891496161829543137L;
-	/**
-	 * 
-	 */
+/**
+ * Contains the player but also settings 'n shit Its kinda basically a save :3
+ * 
+ * @author nick
+ *
+ */
+public class Player {
+
 	private PlayerCard playerCard;
 	private Pet pet;
-	
-	
+	private Settings settings;
+
 	public Player() {
 		playerCard = new PlayerCard();
-		//pet = new Pet();
+		// pet = new Pet();
 	}
-	
-	/**
-	 * Call this when you load a game
-	 * fixes stuff that has to be transient
-	 */
-	public void onDeserialization(){
-		pet.setDisplayObject(new DisplayObject(pet.getType().getTexture()));
-	}
-	
-	public void addSteps(int _steps){
+
+	public void addSteps(int _steps) {
 		playerCard.setStepsToday(playerCard.getStepsToday() + _steps);
 	}
 
@@ -45,16 +36,24 @@ public class Player implements Serializable {
 
 	public boolean setPlayerCard(PlayerCard playerCard) {
 		this.playerCard = playerCard;
-		return true; //TODO: validate properly
+		return true; // TODO: validate properly
 	}
 
 	public boolean setPet(Pet pet) {
 		this.pet = pet;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return playerCard.toString() + "\n" + pet.toString();
+	}
+
+	public Settings getSettings() {
+		return settings;
+	}
+
+	public void setSettings(Settings settings) {
+		this.settings = settings;
 	}
 }

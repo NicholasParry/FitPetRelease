@@ -7,6 +7,7 @@ import nz.geek.nicholasparry.fitpet.AppInfo;
 import nz.geek.nicholasparry.fitpet.FitPetMain;
 import nz.geek.nicholasparry.fitpet.Player;
 import nz.geek.nicholasparry.fitpet.PlayerCard;
+import nz.geek.nicholasparry.fitpet.Settings;
 import nz.geek.nicholasparry.fitpet.Screen.NewGameScreen;
 import nz.geek.nicholasparry.fitpet.pets.Pet;
 import nz.geek.nicholasparry.fitpet.pets.Tools.PetFactory;
@@ -46,7 +47,10 @@ public class SaveManager {
 		fpSave.putString("PetName", pet.getName());
 		
 		fpSave.putBoolean("SaveExsists", true);
-		fpSave.putFloat("SaveVersion", AppInfo.VersionNumber);
+		fpSave.putFloat("SaveVersion", AppInfo.SaveVersion);
+		
+		fpSave.putBoolean("MusicOn", Settings.music);
+		fpSave.putBoolean("SFXOn", Settings.sfx);
 		
 		fpSave.flush();
 		
@@ -70,7 +74,15 @@ public class SaveManager {
 		Gdx.app.log("SaveManager", "Loading Save");
 		try{ 
 			
-			if(fpSave.getFloat("SaveVersion") != AppInfo.VersionNumber){
+			if(fpSave.getFloat("SaveVersion") != AppInfo.SaveVersion || (fpSave.getFloat("SaveVersion") == 0.000f)){
+				if(fpSave.getFloat("SaveVersion") == 0.001f){
+					Gdx.app.log("save","Save Version out of date, updateing from 0.001 to 0.003");
+					
+					fpSave.putBoolean("MusicOn", Settings.music);
+					fpSave.putBoolean("SFXOn", Settings.sfx);
+					return loadGame();
+					
+				}
 				Gdx.app.log("save","Save Version out of date, unable to update save file");
 				//FitPetMain.fitPetMain.setScreen(new NewGameScreen(FitPetMain.fitPetMain)); //beautiful
 				return null;  //even more beautiful
@@ -94,6 +106,8 @@ public class SaveManager {
 			pet.setHealth(fpSave.getInteger("PetHealth"));
 			pet.setName(fpSave.getString("PetName"));
 			
+			Settings.music = fpSave.getBoolean("MusicOn");
+			
 			player.setPlayerCard(pc);
 			player.setPet(pet);
 		}  catch (Exception ex){
@@ -109,6 +123,7 @@ public class SaveManager {
 			}
 			
 		}
+		Gdx.app.log("save", "Sucsessfully Loaded");
 		return player;
 	}
 	

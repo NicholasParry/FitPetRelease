@@ -11,28 +11,30 @@ public enum Elements {
 	 
 	public double elementPenalty(Elements _otherElement){
 		
+		
 		if(this.name().equals("FIRE")){
-			switch(_otherElement.name()){
-				case "WATER":
-					return 0.75;
-				case "EARTH":
-					return 1.25;
+			if(_otherElement.name().equals("WATER")){
+				return 0.75;
+			} else if (_otherElement.name().equals("EARTH")){
+				return 1.25;
 			}
-		} else if (this.name() == "Water"){
-			switch(_otherElement.name()){
-				case "EARTH":
-					return 0.75;
-				case "FIRE":
-					return 1.25;
+		} else if (this.name().equals("Water")){
+			if(_otherElement.name().equals("EARTH")){
+				return 0.75;
+			} else if(_otherElement.name().equals("FIRE")){
+				return 1.25;
 			}
 		} else if (this.name().equals("EARTH")){
-			switch(_otherElement.name()){
-				case "FIRE":
-					return 0.75;
-				case "WATER":
-					return 1.25;
+			if(_otherElement.name().equals("FIRE")){
+				return 0.75;
+			} else if(_otherElement.name().equals("WATER")){
+				return 1.25;
 			}
 		}
+		
+		
+		
+		
 		
 		
 		
