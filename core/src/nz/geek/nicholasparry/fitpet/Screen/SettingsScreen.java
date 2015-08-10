@@ -39,7 +39,7 @@ public class SettingsScreen implements Screen {
 		
 		toggleMusic = new TextureButton(Buttons.toggleMusicOn, Buttons.toggleMusicOn, Buttons.toggleMusicOff);
 		toggleMusic.setChecked(!Settings.music);
-		toggleMusic.setPosition(50, 50);
+		//toggleMusic.setPosition(50, 50);
 		toggleMusic.addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -53,7 +53,7 @@ public class SettingsScreen implements Screen {
 		
 		toggleSFX = new TextureButton(Buttons.toggleSfxOn, Buttons.toggleSfxOn, Buttons.toggleSfxOff);
 		toggleSFX.setChecked(!Settings.sfx);
-		toggleSFX.setPosition(260, 50);
+		//toggleSFX.setPosition(260, 50);
 		toggleSFX.addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
