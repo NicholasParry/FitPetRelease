@@ -35,12 +35,11 @@ public class SettingsScreen implements Screen {
 		stage = new Stage(view);
 		
 		table = new Table(AssetHanldler.skin);
+		
+		
 		toggleMusic = new TextureButton(Buttons.toggleMusicOn, Buttons.toggleMusicOn, Buttons.toggleMusicOff);
 		toggleMusic.setChecked(!Settings.music);
-		toggleSFX = new TextureButton(Buttons.toggleSfxOn, Buttons.toggleSfxOn, Buttons.toggleSfxOff);
-		toggleSFX.setChecked(!Settings.sfx);
-		
-		
+		toggleMusic.setPosition(50, 50);
 		toggleMusic.addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -50,6 +49,11 @@ public class SettingsScreen implements Screen {
 				FitPetMain.fitPetMain.saveGame();
 			}
 		});
+		
+		
+		toggleSFX = new TextureButton(Buttons.toggleSfxOn, Buttons.toggleSfxOn, Buttons.toggleSfxOff);
+		toggleSFX.setChecked(!Settings.sfx);
+		toggleSFX.setPosition(260, 50);
 		toggleSFX.addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -59,6 +63,8 @@ public class SettingsScreen implements Screen {
 				FitPetMain.fitPetMain.saveGame();
 			}
 		});
+		
+		
 		
 		home = new TextureButton(Buttons.home);
 		home.setSize(200, 200);
